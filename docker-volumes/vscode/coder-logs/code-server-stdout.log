@@ -1,0 +1,20 @@
+[2023-08-20T02:48:28.995Z] info  code-server 4.16.1 94ef3776ad7bebfb5780dfc9632e04d20d5c9a6c
+[2023-08-20T02:48:28.996Z] info  Using user-data-dir ~/.local/share/code-server
+[2023-08-20T02:48:29.012Z] info  Using config file ~/.config/code-server/config.yaml
+[2023-08-20T02:48:29.012Z] info  HTTP server listening on http://0.0.0.0:8080/
+[2023-08-20T02:48:29.012Z] info    - Authentication is disabled
+[2023-08-20T02:48:29.012Z] info    - Not serving HTTPS
+[2023-08-20T02:48:29.012Z] info  Session server listening on /home/coder/.local/share/code-server/code-server-ipc.sock
+[05:34:20] 
+
+
+
+
+[05:34:20] Extension host agent started.
+[05:34:20] Started initializing default profile extensions in extensions installation folder. file:///home/coder/.local/share/code-server/extensions
+[05:34:20] Completed initializing default profile extensions in extensions installation folder. file:///home/coder/.local/share/code-server/extensions
+[05:34:21] [172.19.0.1][932aeea2][ManagementConnection] New connection established.
+[05:34:21] [172.19.0.1][b442ef65][ExtensionHostConnection] New connection established.
+[05:34:22] [172.19.0.1][b442ef65][ExtensionHostConnection] <61> Launched Extension Host Process.
+[05:34:28] [172.19.0.1][932aeea2][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+[05:34:28] [172.19.0.1][b442ef65][ExtensionHostConnection] <61> Extension Host Process exited with code: 0, signal: null.

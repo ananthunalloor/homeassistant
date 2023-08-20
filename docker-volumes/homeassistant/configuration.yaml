@@ -1,0 +1,27 @@
+
+# Loads default set of integrations. Do not remove.
+default_config:
+
+# Load frontend themes from the themes folder
+frontend:
+  themes: !include_dir_merge_named themes
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+api:
+
+panel_iframe:
+  vscode:
+    title: "VSCode"
+    url: "http://localhost:8443/"
+    icon: mdi:microsoft-visual-studio-code
+  esphome:
+    title: "ESPHome"
+    url: "http://localhost:6052"
+    icon: mdi:chip
+  zigbee2mqtt:
+    title: "Zigbee2MQTT"
+    url: "http://localhost:8080"
+    icon: mdi:zigbee
