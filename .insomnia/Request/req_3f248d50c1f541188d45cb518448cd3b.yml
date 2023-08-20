@@ -1,7 +1,7 @@
 _id: req_3f248d50c1f541188d45cb518448cd3b
 type: Request
 parentId: wrk_326cfdbda86247318254ef66ceb3287a
-modified: 1692516565305
+modified: 1692518271657
 created: 1692516311186
 url: http://localhost:8123/api/
 name: Basic test
@@ -12,13 +12,12 @@ parameters: []
 headers:
   - name: User-Agent
     value: Insomnia/2023.5.5
-    id: pair_588a791c4f844559b6c63d798e5b24d2
-  - id: pair_29733939a8d74cad88ff2b36b5746fbd
-    name: Content-Type
+  - name: Content-Type
     value: application/json
-    description: ""
-authentication:
-  type: bearer
+  - name: Authorization
+    value: Bearer
+      eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjMTU3ZjlmYmNmMjQ0MDE0YmJkMjdkNDQwYTJjZGJkMCIsImlhdCI6MTY5MjUxNzExNCwiZXhwIjoyMDA3ODc3MTE0fQ.GaQzvtbdtaFz8_kzfgVHQ-M1ayfksFmS8CS5x4CIezo
+authentication: {}
 metaSortKey: -1692516311186
 isPrivate: false
 settingStoreCookies: true

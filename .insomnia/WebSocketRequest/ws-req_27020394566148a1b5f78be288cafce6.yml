@@ -1,0 +1,29 @@
+_id: ws-req_27020394566148a1b5f78be288cafce6
+type: WebSocketRequest
+parentId: wrk_326cfdbda86247318254ef66ceb3287a
+modified: 1692519430128
+created: 1692518489357
+name: WebSocket test
+url: ws://localhost:8123/api/websocket
+metaSortKey: -1692518489357
+headers:
+  - name: User-Agent
+    value: Insomnia/2023.5.5
+    id: pair_6ba33b4e81d3417196df458957577551
+  - id: pair_447b6a5ba2b24b408ba4b50658e13c3b
+    name: Authorization
+    value: Bearer
+      eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjMTU3ZjlmYmNmMjQ0MDE0YmJkMjdkNDQwYTJjZGJkMCIsImlhdCI6MTY5MjUxNzExNCwiZXhwIjoyMDA3ODc3MTE0fQ.GaQzvtbdtaFz8_kzfgVHQ-M1ayfksFmS8CS5x4CIezo
+    description: ""
+    disabled: true
+authentication: {}
+parameters:
+  - id: pair_1a672dd05e8e4288a39999df54d77597
+    name: ""
+    value: ""
+    description: ""
+settingEncodeUrl: true
+settingStoreCookies: true
+settingSendCookies: true
+settingFollowRedirects: global
+description: ""
