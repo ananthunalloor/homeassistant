@@ -4,7 +4,7 @@ services:
     container_name: homeassistant
     image: "homeassistant/home-assistant:latest"
     volumes:
-      - /home/ananthu/wasser/docker-volumes/homeassistant:/config
+      - ~/wasser/docker-volumes/homeassistant:/config
       - /etc/localtime:/etc/localtime:ro
     restart: unless-stopped
     privileged: true
@@ -17,9 +17,9 @@ services:
     image: codercom/code-server
     volumes:
       # Set <project dir> to the directory you want to open in VS Code.
-      - /home/ananthu/wasser/docker-volumes/vscode:/config
+      - ~/wasser/docker-volumes:/config
       # <vs code config> should point to a local dir where vs code stores its data.
-      - /home/ananthu/wasser/docker-volumes/vscode:/home/coder/.local/share/code-server
+      - ~/wasser/docker-volumes/vscode:/home/coder/.local/share/code-server
     ports:
       - "8443:8080"
     command: code-server --auth none --disable-telemetry /config
@@ -34,9 +34,9 @@ services:
       # This port is for Webhooks
       - "9001:9001"
     volumes:
-      - /home/ananthu/wasser/docker-volumes/mosquitto/config:/mosquitto/config
-      - /home/ananthu/wasser/docker-volumes/mosquitto/data:/mosquitto/data
-      - /home/ananthu/wasser/docker-volumes/mosquitto/log:/mosquitto/log
+      - ~/docker-volumes/mosquitto/config:/mosquitto/config
+      - ~/docker-volumes/mosquitto/data:/mosquitto/data
+      - ~/docker-volumes/mosquitto/log:/mosquitto/log
       
   #ESPHome 
   esphome:
@@ -46,7 +46,7 @@ services:
       - "6052:6052"
     volumes:
       # Update PATH_TO_YOUR_CONFIG, the :rw gives the container Read/Write access
-      - /home/ananthu/wasser/docker-volumes/esphome:/config:rw
+      - ~/docker-volumes/esphome:/config:rw
       # Use local time for logging timestamps
       - /etc/localtime:/etc/localtime:ro
     # You do have to map a serial port here. Determine your port and uncomment.
