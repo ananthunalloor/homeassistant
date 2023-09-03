@@ -1,0 +1,59 @@
+esphome:
+  name: mistcontroller
+  friendly_name: MistController
+
+esp8266:
+  board: esp01_1m
+  framework:
+    # version: 3.1.1
+    platform_version: 4.2.1
+
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "cr65Eu6PjmjTQJbHwJxGZxuxgIGeNj5HurRMcXO4Z+s="
+
+ota:
+  password: "58be8ae7f430d71e31686990ee8eb6d1"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  fast_connect: on
+  manual_ip:
+   static_ip: 192.168.100.98
+   gateway: 192.168.100.1
+   subnet: 255.255.255.0
+
+  #Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Mistcontroller Fallback Hotspot"
+    password: "2ILfTgLSYwGk"
+
+captive_portal:
+
+status_led:
+  pin:
+    number: GPIO2
+    inverted: True
+
+switch:
+  - platform: gpio
+    pin: GPIO4
+    name: "relay"
+    id: relay
+
+binary_sensor:
+  - platform: gpio
+    pin: 
+      number: GPIO5
+      mode:
+        input: true
+        pullup: true
+    name: "switch"
+    device_class: power
+    

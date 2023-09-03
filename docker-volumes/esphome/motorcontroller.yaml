@@ -1,0 +1,50 @@
+esphome:
+  name: motorcontroller
+  friendly_name: MotorController
+
+esp8266:
+  board: esp01_1m
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "A8iG7WonQlrszb7QrUIEAy9fOK8no3EYcC4TQKyDA5s="
+
+ota:
+  password: "fb46f97318a4b219018f1413678ce613"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Motorcontroller Fallback Hotspot"
+    password: "2S6qv26p3vrC"
+
+captive_portal:
+
+status_led:
+  pin:
+    number: GPIO2
+    inverted: True
+
+switch:
+  - platform: gpio
+    pin: GPIO4
+    name: "relay"
+    id: relay
+
+binary_sensor:
+  - platform: gpio
+    pin: 
+      number: GPIO5
+      mode:
+        input: true
+        pullup: true
+    name: "switch"
+    device_class: power
+    
