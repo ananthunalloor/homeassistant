@@ -34,9 +34,9 @@ services:
       # This port is for Webhooks
       - "9001:9001"
     volumes:
-      - ~/docker-volumes/mosquitto/config:/mosquitto/config
-      - ~/docker-volumes/mosquitto/data:/mosquitto/data
-      - ~/docker-volumes/mosquitto/log:/mosquitto/log
+      - ~/wasser/docker-volumes/mosquitto/config:/mosquitto/config
+      - ~/wasser/docker-volumes/mosquitto/data:/mosquitto/data
+      - ~/wasser/docker-volumes/mosquitto/log:/mosquitto/log
       
   #ESPHome 
   esphome:
@@ -46,7 +46,7 @@ services:
       - "6052:6052"
     volumes:
       # Update PATH_TO_YOUR_CONFIG, the :rw gives the container Read/Write access
-      - ~/docker-volumes/esphome:/config:rw
+      - ~/wasser/docker-volumes/esphome:/config:rw
       # Use local time for logging timestamps
       - /etc/localtime:/etc/localtime:ro
     # You do have to map a serial port here. Determine your port and uncomment.
