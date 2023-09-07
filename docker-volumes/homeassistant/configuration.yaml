@@ -37,3 +37,16 @@ sensor:
       - 'time_date'
       - 'time_utc'
       - 'beat'
+
+sensor:
+  - platform: template
+    sensors:
+      vapor_deficit:
+        friendly_name: "Vapor Pressure Deficit(kPa)"
+        value_template: >-
+          {% set T = ((states('sensor.zerow_temperature') | float) - 32) * 5/9 %}
+          {% set RH = states('sensor.zerow_humidity')|float %}
+          {% set SVP = 0.61078 * e ** (17.2694 * T / (T + 238.3)) %}
+          {% set VPD = ((100-RH) / 100) * SVP %}
+          {{-VPD | round(2) -}}
+        unit_of_measurement: 'kPa'

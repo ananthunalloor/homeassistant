@@ -1,0 +1,31 @@
+esphome:
+  name: sensornode
+  friendly_name: SensorNode
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "7yUepy1m02BbV/A5LGb/DS0+avI81drtl77/X8HVax4="
+
+ota:
+  password: "3f4c5ef4d4d31a6e44d6e1e7846be1c3"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Sensornode Fallback Hotspot"
+    password: "7WZwPd7d5xc7"
+
+captive_portal:
+    

@@ -11,6 +11,7 @@ esp8266:
 
 # Enable logging
 logger:
+  level: VERY_VERBOSE
 
 # Enable Home Assistant API
 api:

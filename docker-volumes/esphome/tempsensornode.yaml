@@ -1,21 +1,21 @@
 esphome:
-  name: polyhousesenornode
-  friendly_name: Polyhouse1.sensor
+  name: tempsensornode
+  friendly_name: TempSensorNode
 
 esp8266:
   board: esp01_1m
 
 # Enable logging
 logger:
-  # level: INFO
+  level: INFO
 
 # Enable Home Assistant API
 api:
   encryption:
-    key: "BquWdDclRq2dOxVuIAg+AQ5uyaiU+/hOGV4LtatN570="
+    key: "U7zFg9nNeG7Rom/lF/QmjF3WIbMmzqqr2YiOV7Vkty0="
 
 ota:
-  password: "01f35b3e1f6b5722bda12cb07420431f"
+  password: "625db3d551a59de39f98e14475b80bd8"
 
 wifi:
   ssid: !secret wifi_ssid
@@ -23,11 +23,11 @@ wifi:
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
-    ssid: "Polyhouse1Temperaturesensor1"
-    password: "pXlkomGFkRIg"
+    ssid: "Tempsensornode Fallback Hotspot"
+    password: "ucoiAubovxVo"
 
 captive_portal:
-
+    
 i2c:
   sda: GPIO2
   scl: GPIO0
@@ -42,8 +42,3 @@ sensor:
       name: "pressure"
     address: 0x76
     update_interval: 60s
-  # - platform: bh1750
-  #   name: "illuminance"
-  #   address: 0x23
-  #   update_interval: 60s
-    
