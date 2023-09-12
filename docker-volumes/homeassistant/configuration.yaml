@@ -17,14 +17,17 @@ panel_iframe:
     title: "VSCode"
     url: "http://localhost:8443/"
     icon: mdi:microsoft-visual-studio-code
+    require_admin: true
   esphome:
     title: "ESPHome"
     url: "http://localhost:6052"
+    require_admin: true
     icon: mdi:chip
   zigbee2mqtt:
     title: "Zigbee2MQTT"
     url: "http://localhost:8080"
     icon: mdi:zigbee
+    require_admin: true
 
 sensor:
   - platform: time_date
@@ -44,7 +47,7 @@ sensor:
       vapor_deficit:
         friendly_name: "Vapor Pressure Deficit(kPa)"
         value_template: >-
-          {% set T = ((states('sensor.zerow_temperature') | float) - 32) * 5/9 %}
+          {% set T = (states('sensor.zerow_temperature') | float) %}
           {% set RH = states('sensor.zerow_humidity')|float %}
           {% set SVP = 0.61078 * e ** (17.2694 * T / (T + 238.3)) %}
           {% set VPD = ((100-RH) / 100) * SVP %}

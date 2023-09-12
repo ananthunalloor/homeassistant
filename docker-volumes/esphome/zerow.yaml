@@ -28,6 +28,11 @@ wifi:
     ssid: "Zerow Fallback Hotspot"
     password: "kto8VYAoy0ow"
 
+  manual_ip:
+   static_ip: 192.168.137.227
+   gateway: 192.168.137.1
+   subnet: 255.255.255.0
+
 i2c:
   sda: 16
   scl: 17
