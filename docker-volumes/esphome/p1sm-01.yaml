@@ -1,0 +1,96 @@
+esphome:
+  name: p1sm-01
+  friendly_name: P1SM-01
+
+esp32:
+  board: esp32-c3-devkitm-1
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "taykU7lHYETc8xScEmVLSVba6MrHiWPb00+g2d30I4c="
+
+ota:
+  password: "191842e63611f4c388d1ab947bf25c3c"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  manual_ip:
+    static_ip: 192.168.100.119
+    gateway: 0.0.0.0
+    subnet: 255.255.255.0
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "P1Sm-01 Fallback Hotspot"
+    password: "Oy0dBlYy8WRj"
+
+captive_portal:
+
+sensor:
+  - platform: wifi_signal
+    name: p1sm-01 WiFi Signal
+    update_interval: 60s
+
+  - platform: uptime
+    name: p1sm-01 Uptime
+    filters:
+      - lambda: return x / 60.0;
+    unit_of_measurement: minutes
+
+  - platform: adc
+    pin: 3
+    name: "Soil Moisture"
+    unit_of_measurement: "%"
+    device_class: MOISTURE
+    update_interval: 2s
+    attenuation: 11db
+    filters:
+    - calibrate_linear:
+        - 1.10 ->  100.00
+        - 2.44 ->  0.00
+    - lambda: |
+       if (x < 0) return 0;
+       else if (x < 100) return 100;
+       else return (x);
+    accuracy_decimals: 0
+
+  - platform: adc
+    pin: 2
+    name: "Battery Voltage"
+    id: SM01_BV
+    unit_of_measurement: "v"
+    device_class: VOLTAGE
+    update_interval: 2s
+    attenuation: 11db
+    filters:
+    - multiply: 2.0
+
+  - platform: template
+    name: "Battery Life"
+    unit_of_measurement: "%"
+    device_class: BATTERY
+    update_interval: 2s
+    lambda: return id(SM01_BV).state;
+    filters:
+    - calibrate_polynomial:
+        degree: 4
+        datapoints:
+        - 3.4 ->  0.0
+        - 3.6 ->  8.43
+        - 3.81 ->  50.06
+        - 3.86 ->  57.63
+        - 3.92 ->  72.56
+        - 3.96 ->  90.96
+        - 4.05 ->  100
+    - lambda: |
+        if (x < 0) return 0; 
+        else if (x > 100) return 100;
+        else return (x);

@@ -1,0 +1,31 @@
+esphome:
+  name: p1sm-02
+  friendly_name: P1SM-02
+
+esp32:
+  board: esp32-c3-devkitm-1
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "LZElIvIb1XzZ9/AaLWv2BAxfEHLsdmrz3DtKhKgQr3Q="
+
+ota:
+  password: "a245f40a9baad1fa4b2c151ecd9b73af"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "P1Sm-02 Fallback Hotspot"
+    password: "GGW5LwmE4DX8"
+
+captive_portal:
+    
