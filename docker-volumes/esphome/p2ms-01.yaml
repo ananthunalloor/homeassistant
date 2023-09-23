@@ -1,0 +1,71 @@
+#mac-add A8:48:FA:DD:65:D7
+
+esphome:
+  name: p2ms-01
+  friendly_name: P2MS-01
+
+esp8266:
+  # board: esp01_1m
+  board: esp07
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "1CFhapKWPkr6/uJwdp1mTl33zjk01wlTz/Tetegj6NQ="
+
+ota:
+  password: "2a6847f615744b65c91d17e300801152"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "P2Ms-01 Fallback Hotspot"
+    password: "hj7rjoJDlsp1"
+
+captive_portal:
+
+switch:
+  - platform: gpio
+    pin: GPIO13
+    name: "Drip Relay"
+    inverted: True
+    id: relay1
+
+  - platform: gpio
+    pin: GPIO12
+    name: "Mist Relay"
+    inverted: True
+    id: relay2
+
+binary_sensor:
+  - platform: gpio
+    pin: 
+      number: GPIO5
+      inverted: true
+    on_press:
+      then:
+        - switch.turn_on: relay1
+    on_release:
+      then:
+        - switch.turn_off: relay1
+    name: "Drip Relay Sensor"
+    device_class: power
+    
+  - platform: gpio
+    pin: 
+      number: GPIO4
+      inverted: true
+    on_press:
+      then:
+        - switch.turn_on: relay2
+    on_release:
+      then:
+        - switch.turn_off: relay2
+    name: "Mist Relay Sensor"
+    device_class: power
