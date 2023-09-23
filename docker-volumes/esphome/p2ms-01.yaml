@@ -69,3 +69,14 @@ binary_sensor:
         - switch.turn_off: relay2
     name: "Mist Relay Sensor"
     device_class: power
+
+sensor:
+  - platform: wifi_signal
+    name: WiFi Signal Strength
+    update_interval: 60s
+
+  - platform: uptime
+    name: Uptime
+    filters:
+      - lambda: return x / 60.0;
+    unit_of_measurement: minutes
