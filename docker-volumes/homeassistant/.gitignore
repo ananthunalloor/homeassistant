@@ -6,6 +6,14 @@
 !.gitignore
 !*.md
 
+
+# whitelist folders and subfolders and files
+!themes
+!www
+!www/**
+
+
+
 # Ignore folders.
 .storage
 .cloud
