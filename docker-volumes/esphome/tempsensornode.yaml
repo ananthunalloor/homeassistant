@@ -7,7 +7,7 @@ esp8266:
 
 # Enable logging
 logger:
-  level: INFO
+# level: INFO
 
 # Enable Home Assistant API
 api:
@@ -26,10 +26,10 @@ wifi:
     ssid: "Tempsensornode Fallback Hotspot"
     password: "ucoiAubovxVo"
 
-  manual_ip:
-   static_ip: 192.168.137.11
-   gateway: 192.168.137.1
-   subnet: 255.255.255.0
+  # manual_ip:
+  #  static_ip: 192.168.137.11
+  #  gateway: 192.168.137.1
+  #  subnet: 255.255.255.0
 
 captive_portal:
     

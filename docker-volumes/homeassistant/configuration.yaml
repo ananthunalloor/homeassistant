@@ -2,6 +2,10 @@
 # Loads default set of integrations. Do not remove.
 default_config:
 
+system_health:
+
+mobile_app:
+
 # Load frontend themes from the themes folder
 frontend:
   themes: !include_dir_merge_named themes
@@ -29,6 +33,9 @@ panel_iframe:
     icon: mdi:zigbee
     require_admin: true
 
+################################## SENSORS #####################################
+
+# TIME/DATE SENSOR
 sensor:
   - platform: time_date
     display_options:
@@ -41,6 +48,7 @@ sensor:
       - 'time_utc'
       - 'beat'
 
+# TEMPLATE VPD SENSORS
 sensor:
   - platform: template
     sensors:
@@ -53,3 +61,18 @@ sensor:
           {% set VPD = ((100-RH) / 100) * SVP %}
           {{-VPD | round(2) -}}
         unit_of_measurement: 'kPa'
+
+################################ INPUTS #################################
+
+input_number:
+  tds_input:
+    name: TDS Input
+    min: 100
+    max: 500
+  ph_input:
+    name: PH Value
+    min: 1
+    max: 14
+    step: .1
+    icon: mdi:bullseye
+    unit_of_measurement: pH
