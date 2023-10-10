@@ -1,0 +1,11 @@
+# node-red file system git ignore
+
+node_modules
+.npm
+
+# node-red runtime data
+
+*.backup
+.config.*
+
+package-lock.json
