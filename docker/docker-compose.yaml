@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   homeassistant:
     container_name: homeassistant
@@ -24,7 +24,7 @@ services:
       - "8443:8080"
     command: code-server --auth none --disable-telemetry /config
     restart: unless-stopped
-  
+
   #Mosquitto
   mosquitto:
     container_name: mqtt
@@ -32,13 +32,13 @@ services:
     ports:
       - "1883:1883"
       # This port is for Webhooks
-      - "9001:9001"
+      # - "9001:9001"
     volumes:
       - ~/wasser/docker-volumes/mosquitto/config:/mosquitto/config
       - ~/wasser/docker-volumes/mosquitto/data:/mosquitto/data
       - ~/wasser/docker-volumes/mosquitto/log:/mosquitto/log
-      
-  #ESPHome 
+
+  #ESPHome
   esphome:
     container_name: esphome
     image: esphome/esphome
@@ -52,8 +52,8 @@ services:
     # You do have to map a serial port here. Determine your port and uncomment.
     #devices:
     #  - /dev/ttyAMC0:/dev/ttyAMC0
-    restart: always
-    
+    restart: unless-stopped
+
   #Zigbee2MQTT
   # zigbee2mqtt:
   #   container_name: zigbee2mqtt
@@ -72,8 +72,8 @@ services:
   #         memory: 100M
   #   restart: always
   #   privileged: true
-  
-  #Rhasspy  
+
+  #Rhasspy
   # rhasspy:
   #   image: "rhasspy/rhasspy"
   #   container_name: rhasspy
