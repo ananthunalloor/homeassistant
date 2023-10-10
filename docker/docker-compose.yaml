@@ -54,6 +54,19 @@ services:
     #  - /dev/ttyAMC0:/dev/ttyAMC0
     restart: unless-stopped
 
+  #Node-Red
+  nodered:
+    container_name: nodered
+    image: nodered/node-red
+    ports:
+      - "1880:1880"
+    volumes:
+      - ~/wasser/docker-volumes/nodered:/data
+    restart: unless-stopped
+    depends_on:
+      - homeassistant
+      - mosquitto
+
   #Zigbee2MQTT
   # zigbee2mqtt:
   #   container_name: zigbee2mqtt

@@ -15,6 +15,11 @@ api:
   encryption:
     key: "tbykU7lHYETc8xScEmVLSVba6MrHiWPb00+g2d30I4c="
 
+mqtt:
+  broker: 192.168.0.162
+  username: !secret mqtt_user
+  password: !secret mqtt_password 
+
 ota:
   password: "191842e63611f4c388d1ab947bf25c3c"
 
@@ -41,10 +46,12 @@ sensor:
   - platform: bme280
     temperature:
       name: "Temperature"
+      id: "SM01_T"
     pressure:
       name: "Pressure"
     humidity:
       name: "Humidity"
+      id: "SM01_H"
     address: 0x76
     update_interval: 60s
 
@@ -52,6 +59,19 @@ sensor:
     name: "illuminance"
     address: 0x23
     update_interval: 60s
+
+  - platform: template
+    name: "Vapor Pressure Deficit(kPa)"
+    unit_of_measurement: "kPa"
+    device_class: PRESSURE
+    update_interval: 60s
+    lambda: |-
+      auto e = 2.71828;
+      auto T = id(SM01_T).state;
+      auto RH = id(SM01_H).state;
+      auto SVP = 0.61078 * pow(e, (17.2694 * T / (T + 238.3)));
+      auto VPD = ((100-RH) / 100) * SVP;
+      return VPD;
     
   - platform: wifi_signal
     name: p1sm-01 WiFi Signal

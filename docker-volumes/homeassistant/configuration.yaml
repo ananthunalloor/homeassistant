@@ -27,10 +27,15 @@ panel_iframe:
     url: "http://localhost:6052"
     require_admin: true
     icon: mdi:chip
-  zigbee2mqtt:
-    title: "Zigbee2MQTT"
-    url: "http://localhost:8080"
-    icon: mdi:zigbee
+  # zigbee2mqtt:
+  #   title: "Zigbee2MQTT"
+  #   url: "http://localhost:8080"
+  #   icon: mdi:zigbee
+  #   require_admin: true
+  node_red:
+    title: "Node-RED"
+    url: "http://localhost:1880"
+    icon: mdi:nodejs
     require_admin: true
 
 ################################## SENSORS #####################################
