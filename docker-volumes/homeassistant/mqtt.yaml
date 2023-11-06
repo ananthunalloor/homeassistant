@@ -1,0 +1,58 @@
+sensor:
+  #############P1SN-01################
+  - name: "P1SN-01 Temperature"
+    state_topic: "p1sn-01/sensor/temperature/state"
+    unit_of_measurement: "°C"
+
+  - name: "P1SN-01 Pressure"
+    state_topic: "p1sn-01/sensor/pressure/state"
+    unit_of_measurement: "hPa"
+
+  - name: "P1SN-01 Humidity"
+    state_topic: "p1sn-01/sensor/humidity/state"
+    unit_of_measurement: "%"
+
+  - name: "P1SN-01 Illuminance"
+    state_topic: "p1sn-01/sensor/illuminance/state"
+    unit_of_measurement: "lx"
+
+  - name: "P1SN-01 Vapor Pressure Deficit"
+    state_topic: "p1sn-01/sensor/vapor_pressure_deficitkpa/state"
+    unit_of_measurement: "kPa"
+
+  - name: "P1SN-01 Battery Voltage"
+    state_topic: "p1sn-01/sensor/battery_voltage/state"
+    unit_of_measurement: "V"
+
+  - name: "P1SN-01 Battery Life"
+    state_topic: "p1sn-01/sensor/battery_life/state"
+    unit_of_measurement: "%"
+
+  - name: "P1SN-01 WiFi Signal"
+    state_topic: "'p1sn-01/sensor/wifi_signal/state"
+    unit_of_measurement: "dBm"
+
+  - name: "P1SN-01 Uptime"
+    state_topic: "p1sn-01/sensor/uptime/state"
+    unit_of_measurement: "min"
+
+  ############P1SM-01################
+  - name: "P1SM-01 Soil Moisture"
+    state_topic: "p1sm-01/sensor/soil_moisture/state"
+    unit_of_measurement: "%"
+
+  - name: "P1SM-01 Battery Voltage"
+    state_topic: "p1sm-01/sensor/battery_voltage/state"
+    unit_of_measurement: "V"
+
+  - name: "P1SM-01 Battery Life"
+    state_topic: "p1sm-01/sensor/battery_life/state"
+    unit_of_measurement: "%"
+
+  - name: "P1SM-01 WiFi Signal"
+    state_topic: "'p1sm-01/sensor/wifi_signal/state"
+    unit_of_measurement: "dBm"
+
+  - name: "P1SM-01 Uptime"
+    state_topic: "p1sm-01/sensor/uptime/state"
+    unit_of_measurement: "min"

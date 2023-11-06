@@ -11,9 +11,9 @@ esp32:
 logger:
 
 # Enable Home Assistant API
-api:
-  encryption:
-    key: "tbykU7lHYETc8xScEmVLSVba6MrHiWPb00+g2d30I4c="
+# api:
+#   encryption:
+#     key: "tbykU7lHYETc8xScEmVLSVba6MrHiWPb00+g2d30I4c="
 
 mqtt:
   broker: 192.168.0.162
@@ -24,6 +24,7 @@ ota:
   password: "191842e63611f4c388d1ab947bf25c3c"
 
 wifi:
+  fast_connect: True
   networks:
   - ssid: !secret wifi_ssid
     password: !secret wifi_password
@@ -42,6 +43,10 @@ i2c:
   sda: 6
   scl: 7
 
+deep_sleep:
+  run_duration: 10s
+  sleep_duration: 5min
+
 sensor:
   - platform: bme280
     temperature:
@@ -53,18 +58,18 @@ sensor:
       name: "Humidity"
       id: "SM01_H"
     address: 0x76
-    update_interval: 60s
+    update_interval: 6s
 
   - platform: bh1750
     name: "illuminance"
     address: 0x23
-    update_interval: 60s
+    update_interval: 6s
 
   - platform: template
     name: "Vapor Pressure Deficit(kPa)"
     unit_of_measurement: "kPa"
     device_class: PRESSURE
-    update_interval: 60s
+    update_interval: 6s
     lambda: |-
       auto e = 2.71828;
       auto T = id(SM01_T).state;
@@ -74,15 +79,15 @@ sensor:
       return VPD;
     
   - platform: wifi_signal
-    name: p1sm-01 WiFi Signal
-    update_interval: 60s
+    name: WiFi Signal
+    update_interval: 6s
 
   - platform: uptime
-    name: p1sm-01 Uptime
+    name: Uptime
     filters:
       - lambda: return x / 60.0;
     unit_of_measurement: min
-    update_interval: 60s
+    update_interval: 6s
 
   - platform: adc
     pin: 2
@@ -90,16 +95,16 @@ sensor:
     id: SM01_BV
     unit_of_measurement: "v"
     device_class: VOLTAGE
-    update_interval: 60s
     attenuation: 11db
     filters:
     - multiply: 2.0
+    update_interval: 6s
 
   - platform: template
     name: "Battery Life"
     unit_of_measurement: "%"
     device_class: BATTERY
-    update_interval: 60s
+    update_interval: 6s
     lambda: return id(SM01_BV).state;
     filters:
     - calibrate_polynomial:
