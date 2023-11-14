@@ -1,1 +1,17 @@
-[]
+alias: sleep after mqtt receipt
+description: ""
+trigger:
+  - platform: mqtt
+    topic: p1sn-01/sensor/vapor_pressure_deficitkpa/state
+condition: []
+action:
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 10
+      milliseconds: 0
+  - service: mqtt.publish
+    data:
+      payload: "ON"
+      topic: p1sn-01/sleep_mode
+mode: single

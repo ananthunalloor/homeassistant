@@ -1,3 +1,8 @@
+substitutions:
+  run_duration: 6s
+  sleep_duration: 900s
+  update_interval: 3s
+
 esphome:
   name: p1sm-01
   friendly_name: P1SM-01
@@ -11,30 +16,37 @@ esp32:
 logger:
 
 # Enable Home Assistant API
-# api:
-#   encryption:
-#     key: "taykU7lHYETc8xScEmVLSVba6MrHiWPb00+g2d30I4c="
+api:
+  encryption:
+    key: "taykU7lHYETc8xScEmVLSVba6MrHiWPb00+g2d30I4c="
 
 mqtt:
   broker: 192.168.0.162
   username: !secret mqtt_user
   password: !secret mqtt_password
+  # on_message:
+  #   - topic: p1sm-01/ota_mode
+  #     payload: 'ON'
+  #     then:
+  #       - deep_sleep.prevent: deep_sleep_1
+  #   - topic: p1sm-01/sleep_mode
+  #     payload: 'ON'
+  #     then:
+  #       - deep_sleep.enter: deep_sleep_1
 
-deep_sleep:
-  run_duration: 5s
-  sleep_duration: 15min     
+# deep_sleep:
+#   id: deep_sleep_1
+#   run_duration: $run_duration
+#   sleep_duration: $sleep_duration   
 
 ota:
   password: "191842e63611f4c388d1ab947bf25c3c"
 
 wifi:
+  # fast_connect: True
   networks:
   - ssid: !secret wifi_ssid
     password: !secret wifi_password
-  # - ssid: !secret wifi_ssid
-  #   password: !secret wifi_password
-  # - ssid: !secret wifi_ssid
-  #   password: !secret wifi_password
 
 
   ap:
@@ -46,31 +58,31 @@ captive_portal:
 sensor:
   - platform: wifi_signal
     name: WiFi Signal
-    update_interval: 5s
+    update_interval: $update_interval
 
   - platform: uptime
     name: Uptime
     filters:
       - lambda: return x / 60.0;
     unit_of_measurement: min
-    update_interval: 5s
+    update_interval: $update_interval
 
   - platform: adc
     pin: 3
     name: "Soil Moisture"
     unit_of_measurement: "%"
     device_class: MOISTURE
-    update_interval: 5s
+    update_interval: $update_interval
     attenuation: 11db
     filters:
     - calibrate_linear:
-        - 1.10 ->  100.00
-        - 2.44 ->  0.00
+        - 1.030 ->  100.00
+        - 2.432 ->  0.00
     - lambda: |
        if (x < 0) return 0;
-       else if (x < 100) return 100;
+       else if (x > 100) return 100;
        else return (x);
-    accuracy_decimals: 0
+    accuracy_decimals: 4
 
   - platform: adc
     pin: 2
@@ -78,7 +90,7 @@ sensor:
     id: SM01_BV
     unit_of_measurement: "v"
     device_class: VOLTAGE
-    update_interval: 5s
+    update_interval: $update_interval
     attenuation: 11db
     filters:
     - multiply: 2.0
@@ -87,7 +99,7 @@ sensor:
     name: "Battery Life"
     unit_of_measurement: "%"
     device_class: BATTERY
-    update_interval: 5s
+    update_interval: $update_interval
     lambda: return id(SM01_BV).state;
     filters:
     - calibrate_polynomial:

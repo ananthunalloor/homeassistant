@@ -1,3 +1,8 @@
+substitutions:
+  run_duration: 10s
+  sleep_duration: 5min
+  update_interval: 3s
+
 esphome:
   name: p1sn-01
   friendly_name: P1SN-01
@@ -11,27 +16,33 @@ esp32:
 logger:
 
 # Enable Home Assistant API
-# api:
-#   encryption:
-#     key: "tbykU7lHYETc8xScEmVLSVba6MrHiWPb00+g2d30I4c="
+api:
+  encryption:
+    key: "tbykU7lHYETc8xScEmVLSVba6MrHiWPb00+g2d30I4c="
 
 mqtt:
+  # broker: 192.168.1.102
   broker: 192.168.0.162
   username: !secret mqtt_user
-  password: !secret mqtt_password 
+  password: !secret mqtt_password
+  # on_message:
+  #   - topic: p1sn-01/ota_mode
+  #     payload: 'ON'
+  #     then:
+  #       - deep_sleep.prevent: deep_sleep_1
+  #   - topic: p1sn-01/sleep_mode
+  #     payload: 'ON'
+  #     then:
+  #       - deep_sleep.enter: deep_sleep_1
 
 ota:
   password: "191842e63611f4c388d1ab947bf25c3c"
 
 wifi:
-  fast_connect: True
+  # fast_connect: True
   networks:
   - ssid: !secret wifi_ssid
     password: !secret wifi_password
-  # - ssid: !secret wifi_ssid1
-  #   password: !secret wifi_password1
-  # - ssid: !secret wifi_ssid2
-  #   password: !secret wifi_password2
 
   ap:
     ssid: "P1Sm-01 Fallback Hotspot"
@@ -39,55 +50,46 @@ wifi:
 
 captive_portal:
 
+# deep_sleep:
+#   id: deep_sleep_1
+#   run_duration: $run_duration
+#   sleep_duration: $sleep_duration
+
 i2c:
   sda: 6
   scl: 7
 
-deep_sleep:
-  run_duration: 10s
-  sleep_duration: 5min
-
 sensor:
   - platform: bme280
+    address: 0x76
     temperature:
       name: "Temperature"
       id: "SM01_T"
+      oversampling: 2x
     pressure:
       name: "Pressure"
+      oversampling: 2x
     humidity:
       name: "Humidity"
       id: "SM01_H"
-    address: 0x76
-    update_interval: 6s
+      oversampling: 2x
+    update_interval: $update_interval
 
   - platform: bh1750
     name: "illuminance"
     address: 0x23
-    update_interval: 6s
-
-  - platform: template
-    name: "Vapor Pressure Deficit(kPa)"
-    unit_of_measurement: "kPa"
-    device_class: PRESSURE
-    update_interval: 6s
-    lambda: |-
-      auto e = 2.71828;
-      auto T = id(SM01_T).state;
-      auto RH = id(SM01_H).state;
-      auto SVP = 0.61078 * pow(e, (17.2694 * T / (T + 238.3)));
-      auto VPD = ((100-RH) / 100) * SVP;
-      return VPD;
+    update_interval: $update_interval
     
   - platform: wifi_signal
     name: WiFi Signal
-    update_interval: 6s
+    update_interval: $update_interval
 
   - platform: uptime
     name: Uptime
     filters:
       - lambda: return x / 60.0;
     unit_of_measurement: min
-    update_interval: 6s
+    update_interval: $update_interval
 
   - platform: adc
     pin: 2
@@ -98,13 +100,26 @@ sensor:
     attenuation: 11db
     filters:
     - multiply: 2.0
-    update_interval: 6s
+    update_interval: $update_interval
 
+  - platform: template
+    name: "Vapor Pressure Deficit(kPa)"
+    unit_of_measurement: "kPa"
+    device_class: PRESSURE
+    update_interval: $update_interval
+    lambda: |-
+      auto e = 2.71828;
+      auto T = id(SM01_T).state;
+      auto RH = id(SM01_H).state;
+      auto SVP = 0.61078 * pow(e, (17.2694 * T / (T + 238.3)));
+      auto VPD = ((100-RH) / 100) * SVP;
+      return VPD;
+  
   - platform: template
     name: "Battery Life"
     unit_of_measurement: "%"
     device_class: BATTERY
-    update_interval: 6s
+    update_interval: $update_interval
     lambda: return id(SM01_BV).state;
     filters:
     - calibrate_polynomial:
